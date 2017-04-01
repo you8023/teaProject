@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>茶叶商城</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+    
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+
+</head>
+<body>
+    <script type="text/javascript" src="js/flexible.js"></script>
+    <!-- 先引入 Vue -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+    <script src="js/vueJs.js"></script>
+    <div id="header">
+        <i class="iconfont" id="menu">&#xf000d;</i>
+        <form action="##">
+            <input type="text" placeholder="众多好茶等你发现">
+            <button type="submit">
+                <i class="iconfont" id="search">&#xe503;</i>
+            </button>
+            
+        </form>
+    </div>
+    <mt-swipe :auto="4000">
+        <mt-swipe-item>
+            <img src="images/banner1.jpg">
+        </mt-swipe-item>
+        <mt-swipe-item>
+            <img src="images/banner2.jpg">
+        </mt-swipe-item>
+        <mt-swipe-item>
+            <img src="images/banner3.jpg">
+        </mt-swipe-item>
+    </mt-swipe>
+    <div id="footer">
+        <a href="##">
+            <li class="choice">
+                <i class="iconfont">&#xe684;</i>
+                <p>首页</p>
+            </li>
+        </a>
+        <a href="##">
+            <li class="choice">
+                <i class="iconfont">&#xe642;</i>
+                <p>商城</p>
+            </li>
+        </a>
+        <a href="##">
+            <li class="choice">
+                <i class="iconfont">&#xe64f;</i>
+                <p>茶篮</p>
+            </li>
+        </a>
+        <a href="##">
+            <li class="choice">
+                <i class="iconfont">&#xe60f;</i>
+                <p>我的</p>
+            </li>
+        </a>
+    </div>
+    
+</body>
+</html>
