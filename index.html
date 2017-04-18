@@ -16,53 +16,124 @@
     <!-- 引入组件库 -->
     <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
     <script src="js/vueJs.js"></script>
-    <div id="header">
-        <i class="iconfont" id="menu">&#xf000d;</i>
-        <form action="##">
-            <input type="text" placeholder="众多好茶等你发现">
-            <button type="submit">
-                <i class="iconfont" id="search">&#xe503;</i>
-            </button>
-            
-        </form>
+    <div id="container">
+        <!-- 顶部搜索和菜单按钮 -->
+        <div id="header">
+            <i class="iconfont" id="menu">&#xf000d;</i>
+            <form action="##">
+                <input type="text" placeholder="众多好茶等你发现">
+                <button type="submit">
+                    <i class="iconfont" id="search">&#xe503;</i>
+                </button>
+                
+            </form>
+        </div>
+        <!-- 轮播 -->
+        <div id="slide">
+            <mt-swipe :auto="4000">
+                <mt-swipe-item>
+                    <img src="images/banner1.jpg">
+                </mt-swipe-item>
+                <mt-swipe-item>
+                    <img src="images/banner2.jpg">
+                </mt-swipe-item>
+                <mt-swipe-item>
+                    <img src="images/banner3.jpg">
+                </mt-swipe-item>
+            </mt-swipe>
+        </div>
+        <!-- 底部菜单 -->
+        <div id="footer">
+            <a href="##">
+                <li class="choice">
+                    <i class="iconfont">&#xe684;</i>
+                    <p>首页</p>
+                </li>
+            </a>
+            <a href="##">
+                <li class="choice">
+                    <i class="iconfont">&#xe642;</i>
+                    <p>商城</p>
+                </li>
+            </a>
+            <a href="##">
+                <li class="choice">
+                    <i class="iconfont">&#xe64f;</i>
+                    <p>茶篮</p>
+                </li>
+            </a>
+            <a href="##">
+                <li class="choice">
+                    <i class="iconfont">&#xe60f;</i>
+                    <p>我的</p>
+                </li>
+            </a>
+        </div>
+        <!-- 侧拉菜单 -->
+        <!-- 遮罩 -->
+        <div id="shade"></div>
+        <!-- 菜单 -->
+        <div id="sideMenu">
+            <ul>
+                <a href="##">
+                    <li class="sort">绿茶</li>
+                </a>
+                <a href="##">
+                    <li class="sort">红茶</li>
+                </a>
+                <a href="##">
+                    <li class="sort">普洱茶</li>
+                </a>
+                <a href="##">
+                    <li class="sort">礼盒</li>
+                </a>
+                <a href="##">
+                    <li class="sort">特级贡茶</li>
+                </a>
+                <a href="##">
+                    <li class="sort">其他</li>
+                </a>
+            </ul>
+        </div>
+
     </div>
-    <mt-swipe :auto="4000">
-        <mt-swipe-item>
-            <img src="images/banner1.jpg">
-        </mt-swipe-item>
-        <mt-swipe-item>
-            <img src="images/banner2.jpg">
-        </mt-swipe-item>
-        <mt-swipe-item>
-            <img src="images/banner3.jpg">
-        </mt-swipe-item>
-    </mt-swipe>
-    <div id="footer">
-        <a href="##">
-            <li class="choice">
-                <i class="iconfont">&#xe684;</i>
-                <p>首页</p>
-            </li>
-        </a>
-        <a href="##">
-            <li class="choice">
-                <i class="iconfont">&#xe642;</i>
-                <p>商城</p>
-            </li>
-        </a>
-        <a href="##">
-            <li class="choice">
-                <i class="iconfont">&#xe64f;</i>
-                <p>茶篮</p>
-            </li>
-        </a>
-        <a href="##">
-            <li class="choice">
-                <i class="iconfont">&#xe60f;</i>
-                <p>我的</p>
-            </li>
-        </a>
-    </div>
-    
 </body>
+<script type="text/javascript">
+    var menuBtn = document.getElementById("menu"),
+    sideMenu = document.getElementById("sideMenu"),
+    shade = document.getElementById("shade");
+    menuBtn.onclick = function () {
+        showMenu();
+    };
+    menuBtn.addEventListener("touchstart", function () {
+        showMenu();
+    }, false);
+    shade.onclick = function () {
+        hideMenu();
+    };
+    shade.addEventListener("touchstart", function () {
+        hideMenu();
+    }, false);
+    function showMenu () {
+        sideMenu.style.display = "block";
+        shade.style.display = "block";
+    }
+    function hideMenu () {
+        var i = 250, j = 0.5;
+        // 每隔0.001ms就宽度减少5/37.5rem，遮罩的透明度降低0.01
+        var hide = setInterval(function () {
+            i = i - 5;
+            j = j - 0.01;
+            shade.style.opacity = j;
+            sideMenu.style.width = i / 37.5 + "rem";
+            if (i <= 0 || j <= 0) {
+                shade.style.display = "none";
+                sideMenu.style.display = "none";
+                sideMenu.style.width = 250 / 37.5 + "rem";
+                shade.style.opacity = 0.5;
+                clearInterval(hide);
+            }
+        }, 0.001); 
+    }
+</script>
 </html>

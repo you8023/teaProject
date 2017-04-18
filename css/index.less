@@ -2,10 +2,13 @@
     width: @width;
     height: @height;
 }
-// @bgColor: #66D98C;
-@bgColor: #66CC8C;
-@mainColor: #214402;
-@iconColor: #fff;
+@bgColor: #f2f2f2;
+@btnBgColor: #fff;
+@mainColor: #6a847e;
+@iconColor: #6a847e;
+@searchColor: #c4cdc5;
+@searchContentColor: #fff;
+@searchPlaceholderColor: #fff;
 @font-face {
     font-family: 'iconfont';
     src: url('../icon/iconfont.eot');
@@ -14,27 +17,94 @@
     url('../icon/iconfont.ttf') format('truetype'),
     url('../icon/iconfont.svg#iconfont') format('svg');
 }
+// 菜单显示动画
+@keyframes showMenu
+{
+    from {width: 0;}
+    to {width: 250 / 37.5rem;}
+}
+@-moz-keyframes showMenu /* Firefox */
+{
+    from {width: 0;}
+    to {width: 250 / 37.5rem;}
+}
+@-webkit-keyframes showMenu /* Safari and Chrome */
+{
+    from {width: 0;}
+    to {width: 250 / 37.5rem;}
+}
+@-o-keyframes showMenu /* Opera */
+{
+    from {width: 0;}
+    to {width: 250 / 37.5rem;}
+}
+@keyframes darkenShade
+{
+    from {opacity: 0;}
+    to {opacity: .5;}
+}
+@-moz-keyframes darkenShade /* Firefox */
+{
+    from {opacity: 0;}
+    to {opacity: .5;}
+}
+@-webkit-keyframes darkenShade /* Safari and Chrome */
+{
+    from {opacity: 0;}
+    to {opacity: .5;}
+}
+@-o-keyframes darkenShade /* Opera */
+{
+    from {opacity: 0;}
+    to {opacity: .5;}
+}
 * {
     margin: 0;
     padding: 0;
     list-style: none;
+    text-decoration: none;
+}
+#container {
+    background-color: @bgColor;
 }
 // 顶部
 #header {
-    .size (380 / 40rem, 1rem);
-    margin: 0 auto;
-    margin-top: 7 / 40rem;
+    .size (360 / 37.5rem, 1rem);
+    position: fixed;
+    top: 7 / 37.5rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1;
     input {
-        .size (275 / 40rem, 1rem);
+        .size (260 / 37.5rem, 1rem);
         float: right;
-        border: 1 / 40rem solid @bgColor;
-        padding-left: 10 / 40rem;
-        padding-right: 55 / 40rem;
+        border: none;
+        border-radius: .5rem;
+        padding-left: 10 / 37.5rem;
+        padding-right: 55 / 37.5rem;
+        opacity: .7;
+        font-size: 18 / 37.5rem;
+        color: @searchContentColor;
+        background-color: @searchColor;
     }
+    // 修改placeholder颜色
+    input::-webkit-input-placeholder { /* WebKit browsers */ 
+        color: @searchPlaceholderColor; 
+    } 
+    input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+        color: @searchPlaceholderColor; 
+    } 
+    input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+        color: @searchPlaceholderColor; 
+    } 
+    input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+        color: @searchPlaceholderColor; 
+    } 
     button {
         position: relative;
-        top: -37 / 40rem;
-        left: 330 / 40rem;
+        top: -25 / 37.5rem;
+        left: 320.5 / 37.5rem;
         border: 0;
         background-color: transparent;
     }
@@ -44,36 +114,39 @@
 }
 .iconfont{
     font-family: "iconfont" !important;
-    font-size: 30 / 40rem;
+    font-size: 30 / 37.5rem;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing: grayscale;
 }
 #menu {
-    font-size: 27 / 40rem;
-    line-height: 1rem;
+    font-size: 27 / 37.5rem;
+    // line-height: 1rem;
+    padding-top: -6 / 37.5rem;
     float: left;
     color: @mainColor;
 }
 #search {
-    font-size: 35 / 40rem;
-    color: @mainColor;
+    font-size: 25 / 37.5rem;
+    padding-top: 7 / 37.5rem;
+    color: @searchContentColor;
 }
-mt-swipe {
-    .size (375 / 40rem, 180 / 40rem);
-    margin: 0 auto;
+#slide {
+    .size (100%, 260 / 37.5rem);
+    position: absolute;
+    top: 0;
 }
 mt-swipe-item {
-    .size (375 / 40rem, 180 / 40rem);
+    .size (100%, 260 / 37.5rem);
     margin: 0 auto;
     img {
-        .size (375 / 40rem, 180 / 40rem);
+        .size (100%, 260 / 37.5rem);
     }
 }
 // 底部菜单栏
 #footer {
-    .size (10rem, 70 / 40rem);
+    .size (10rem, 70 / 37.5rem);
     position: fixed;
     bottom: 0;
     left: 0;
@@ -81,10 +154,43 @@ mt-swipe-item {
     margin: auto;
 }
 .choice {
-    .size (2.5rem, 70 / 40rem);
-    padding-top: 10 / 40rem;
+    .size (2.5rem, 70 / 37.5rem);
+    padding-top: 10 / 37.5rem;
     float: left;
     text-align: center;
     color: @iconColor;
-    background-color: @bgColor;
+    background-color: @btnBgColor;
 }
+#shade {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: .5;
+    z-index: 2;
+    display: none;
+    animation: darkenShade .5s;
+    -moz-animation: darkenShade .5s; /* Firefox */
+    -webkit-animation: darkenShade .5s; /* Safari and Chrome */
+    -o-animation: darkenShade .5s; /* Opera */
+}
+#sideMenu {
+    .size (250 / 37.5rem, 100%);
+    background-color: #fff; 
+    position: absolute;
+    z-index: 2;
+    display: none;
+    animation: showMenu .5s;
+    -moz-animation: showMenu .5s; /* Firefox */
+    -webkit-animation: showMenu .5s; /* Safari and Chrome */
+    -o-animation: showMenu .5s; /* Opera */
+    .sort {
+        .size (inherit, 60 / 37.5rem);
+        font-size: 25 / 37.5rem;
+        line-height: 60 / 37.5rem;
+        color: @mainColor;
+        padding-left: 1rem;
+        border-bottom: 1 / 37.5rem solid @mainColor;
+    }  
+}
+
